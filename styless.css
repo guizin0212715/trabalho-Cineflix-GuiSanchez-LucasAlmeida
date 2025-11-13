@@ -1,0 +1,86 @@
+/* ======= mrrobot.css ======= */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Courier New", monospace;
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+}
+
+header {
+    background-color: #111;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #e50914;
+}
+
+header h1 {
+    color: #e50914;
+    font-size: 2em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #e50914;
+    border-left: 4px solid #e50914;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* === Imagens do mesmo tamanho === */
+img {
+    width: 100%;
+    max-width: 800px; /* controla o tamanho máximo */
+    height: 400px; /* altura fixa */
+    object-fit: cover; /* corta proporcionalmente sem distorcer */
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
+}
+
+a {
+    color: #e50914;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #e50914;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #aaa;
+    font-size: 0.9em;
+    border-top: 1px solid #222;
+    margin-top: 40px;
+}
+
+footer a {
+    color: #e50914;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

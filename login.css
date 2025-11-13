@@ -1,0 +1,267 @@
+/* --- GLOBAIS E RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor-principal: #e50914;
+    --cor-fundo: #141414;
+    --cor-texto: #fff;
+    --cor-texto-secundaria: #aaa;
+    --cor-card: #222;
+    --cor-card-hover: #333;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    min-height: 100vh;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* --- CABEÇALHO (LOGO) --- */
+.site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 50px;
+    z-index: 10;
+}
+
+.site-header h1 {
+    color: var(--cor-principal);
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: left;
+    text-transform: uppercase;
+    animation: pisca-logo 1.5s infinite; /* Adicionando animação sutil */
+}
+
+@keyframes pisca-logo {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.profiles-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    margin: 0 auto;
+    padding-top: 20vh; /* Aumenta a margem do topo */
+}
+
+.profiles-container h1 {
+    font-size: 3.5rem;
+    font-weight: 300; /* Leve e elegante */
+    margin-bottom: 50px;
+    color: var(--cor-texto);
+}
+
+/* --- LISTA DE PERFIS --- */
+.profiles-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.profile {
+    display: block;
+    width: 150px;
+    /* Remove o outline padrão do browser no clique */
+    outline: none; 
+}
+
+/* Wrapper da imagem/ícone */
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    /* Borda sutil que acende no hover */
+    border: 4px solid rgba(255, 255, 255, 0); 
+    overflow: hidden;
+    position: relative;
+    
+    /* MELHORIA: Transição de "pop" personalizada */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                border-color 0.2s ease-out;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile span {
+    display: block;
+    margin-top: 15px;
+    color: var(--cor-texto-secundaria);
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.2s ease-out;
+}
+
+/* --- EFEITOS DE HOVER E FOCO --- */
+
+/* Adiciona um 'overlay' escuro que some no hover */
+.profile-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+/* MELHORIA: Adicionado :focus-visible para acessibilidade */
+.profile:hover .profile-image::after,
+.profile:focus-visible .profile-image::after {
+    background: rgba(0, 0, 0, 0);
+}
+
+.profile:hover .profile-image,
+.profile:focus-visible .profile-image {
+    border-color: var(--cor-principal);
+    transform: scale(1.08); /* Aumenta o "pop" */
+}
+
+.profile:hover span,
+.profile:focus-visible span {
+    color: var(--cor-texto);
+}
+
+/* --- BOTÃO "ADICIONAR PERFIL" --- */
+.profile.add-profile .profile-image {
+    background-color: var(--cor-card);
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                border-color 0.2s ease-out;
+}
+
+.profile.add-profile .add-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 4.5rem; /* Mais refinado */
+    color: var(--cor-texto-secundaria);
+    font-weight: 300; /* Mais fino */
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.profile.add-profile:hover .profile-image,
+.profile.add-profile:focus-visible .profile-image {
+    background-color: var(--cor-card-hover);
+    border-color: var(--cor-principal);
+}
+
+/* MELHORIA: Ícone + fica branco no hover/foco */
+.profile.add-profile:hover .add-icon,
+.profile.add-profile:focus-visible .add-icon {
+    color: var(--cor-texto);
+}
+
+
+/* --- BOTÃO "GERENCIAR PERFIS" --- */
+.btn-manage {
+    display: inline-block;
+    margin-top: 80px;
+    border: 2px solid var(--cor-texto-secundaria);
+    background-color: transparent;
+    color: var(--cor-texto-secundaria);
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    
+    /* MELHORIA: Transição mais nítida */
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-manage:hover,
+.btn-manage:focus-visible {
+    border-color: var(--cor-principal);
+    background-color: var(--cor-principal); /* Preenchimento vermelho */
+    color: var(--cor-texto);
+    outline: none;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 20px;
+        text-align: center;
+    }
+    .site-header h1 {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    .profiles-container {
+        padding-top: 15vh;
+    }
+    .profiles-container h1 {
+        font-size: 2.5rem;
+    }
+    .profile {
+        width: 120px;
+    }
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profiles-list {
+        gap: 15px; /* Menos espaço */
+    }
+    .profile {
+        width: calc(50% - 10px); /* 2 colunas */
+        max-width: 130px;
+    }
+    .profile-image {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%; /* Truque para manter o 1:1 aspect ratio */
+        border-width: 3px;
+    }
+    /* Ajuste para imagem e ícone dentro do padding-bottom */
+    .profile-image img,
+    .profile-image .add-icon {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    .profile span {
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+    .profiles-container h1 {
+        font-size: 2rem;
+    }
+    .btn-manage {
+        margin-top: 50px;
+        padding: 10px 25px;
+    }
+}

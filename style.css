@@ -1,0 +1,276 @@
+/* --- GLOBAIS E RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor-principal: #e50914;
+    --fundo-netflix: #141414;
+    --fundo-card: #181818;
+}
+
+body {
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--fundo-netflix); /* FUNDO PRETO NETFLIX */
+    color: #f5f5f5;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+a {
+    color: var(--cor-principal);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.container {
+    width: 95%; /* Mais largura, como na Netflix */
+    max-width: 1400px; /* Permite mais largura em telas grandes */
+    margin: 0 auto;
+}
+
+main {
+    padding-top: 40px; /* Mais espaço do header */
+}
+
+/* --- BARRA DE ROLAGEM GLOBAL --- */
+::-webkit-scrollbar {
+    width: 8px;
+    background: #222;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--cor-principal);
+    border-radius: 4px;
+}
+
+/* --- CABEÇALHO (STICKY) --- */
+.site-header {
+    background-color: var(--fundo-netflix);
+    padding: 20px 0;
+    width: 100%;
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease; /* Efeito de transição */
+}
+
+/* Deixa o header semi-transparente quando a página rola */
+/* (Esta é uma pseudo-classe futura, mas alguns navegadores suportam)
+body:scrolled .site-header { 
+    background-color: rgba(20, 20, 20, 0.85);
+}*/
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-header h1 {
+    color: var(--cor-principal);
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    /* Animação removida - Netflix tem um logo estático */
+}
+
+.site-header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.site-header nav li {
+    margin-left: 25px;
+}
+
+.site-header nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.site-header nav a:hover {
+    color: #fff;
+}
+
+/* --- SEÇÕES DE CARROSSEL (NOVO) --- */
+.carousel-section {
+    padding: 20px 0;
+    width: 100%;
+    /* Previne que o card "cortado" no hover seja escondido */
+    overflow: visible; 
+}
+
+.carousel-section h2 {
+    /* Título limpo, sem borda */
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 15px;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+/* --- O CARROSSEL (NOVO) --- */
+.carousel-container {
+    display: flex;
+    gap: 15px; /* Espaço entre os cards */
+    width: 100%;
+    
+    /* A MÁGICA DO CARROSSEL */
+    overflow-x: auto;
+    overflow-y: hidden;
+    
+    /* Espaço para o card crescer no hover e para a scrollbar */
+    padding: 20px 10px 30px 10px;
+    
+    /* Esconde a scrollbar visualmente (mantém funcionalidade) */
+    -ms-overflow-style: none;  /* IE e Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Esconde a scrollbar no Chrome, Safari e Opera */
+.carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- CARDS DE FILME (Estilo Carrossel) --- */
+.filme {
+    background: var(--fundo-card);
+    border: none;
+    border-radius: 4px; /* Raio menor, mais "Netflix" */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #ccc;
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    
+    /* IMPORTANTE: Define o tamanho dos cards no carrossel */
+    min-width: 200px; 
+    width: 200px;
+    
+    position: relative; /* Essencial para o hover */
+    
+    /* Transição profissional "pop" */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.3s ease, 
+                z-index 0s 0s; /* Z-index imediato no hover */
+}
+
+.filme:hover {
+    /* Efeito de zoom profissional */
+    transform: scale(1.15); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+    z-index: 10; /* Traz o card para frente */
+    
+    /* Garante que o card no hover não seja cortado */
+    position: relative; 
+}
+
+.filme > a {
+    display: block;
+    line-height: 0;
+}
+
+.filme img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.filme-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Fundo escuro para a info, caso o card cresça */
+    background-color: var(--fundo-card);
+}
+
+.filme h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    /* Garante que o texto não quebre feio */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.filme p {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.filme-info a {
+    display: block;
+    margin-top: 5px;
+    color: #00aaff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.filme-info a:hover {
+    color: #fff;
+}
+
+.filme a.saiba-mais {
+    display: inline-block;
+    background-color: var(--cor-principal);
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+    text-align: center;
+}
+.apresentacao-footer {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.botao {
+    display: inline-block;
+    background: #ff0015;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.botao:hover {
+    background: #fff;
+    color: #ff0015;
+    transform: scale(1.05);
+}
